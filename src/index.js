@@ -50,7 +50,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -59,37 +59,53 @@ function App() {
 }
 
 function Header() {
-  return <h1>Fast React Pizza Co</h1>;
+  // const style = { color: "red", fontSize: "40px", textTransform: "upperCase" };
+  const style = {};
+
+  return (
+    <header className="header">
+      <h1 style={style}>Fast React Pizza Co</h1>
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our menu</h2>
-      {pizzaData.map((pizza) => (
-        <Pizza key={pizza.name} pizza={pizza} />
-      ))}
-    </div>
+      <Pizza />
+      <Pizza />
+      <pizza />
+    </main>
   );
 }
 
 function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closehHour = 22;
+  const isOpen = hour >= openHour && hour <= closehHour;
+  console.log(isOpen);
+
+  // if (hour >= openHour && hour <= closehHour) alert("We are currently open");
+  // else alert("Sorry we are not open");
+
   return (
-    <footer>{new Date().toLocaleTimeString()}. We are currently Open</footer>
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}. We are currently Open
+    </footer>
   );
 }
 
-function Pizza({ pizza }) {
+function Pizza() {
   return (
     <div>
-      <img src={pizza.photoName} alt={pizza.name} />
-      <h2>{pizza.name}</h2>
-      <p>{pizza.ingredients}</p>
-      <p>Price: ${pizza.price}</p>
+      <img src={"pizzas/spinaci.jpg"} alt={"Pizza spinaci"} />
+      <h3>Pizza Spinaci</h3>
+      <p>Tomato, mozzarella, spinach, and ricotta cheese</p>
     </div>
   );
 }
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
