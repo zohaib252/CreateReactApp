@@ -74,6 +74,11 @@ function Menu() {
     <main className="menu">
       <h2>Our menu</h2>
 
+      <p>
+        Authenic Italian cusine. 6 creative dishes to choose from.All from our
+        stove oven, all organic, all delicious.
+      </p>
+
       <ul className="pizzas">
         {pizzaData.map((pizza) => (
           <Pizza pizzaObj={pizza} key={pizza.name} />
@@ -97,16 +102,15 @@ function Menu() {
   );
 }
 
-function Pizza(props) {
-  console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        {" "}
-        <h3> {props.pizzaObj.name}</h3>
-        <p> {props.pizzaObj.ingredients} </p>
-        <span>{props.pizzaObj.price + 5}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
